@@ -128,6 +128,8 @@ const politicalBullshits = [
   /\Bочевидно\B/,
 ];
 
+const bullshitArray = [...earningsBullshits, ...politicalBullshits]
+
 const start = () => {
   const style = document.createElement("style");
 
@@ -147,23 +149,16 @@ const start = () => {
     return newHtml;
   };
 
-  const highlightPropaganda = (tagName) => {
-    const tags = document.getElementsByTagName(tagName);
+  const highlightPropaganda = (tagName = 'body') => {
+    const tag = document.getElementsByTagName(tagName)[0];
+    const html = tag.innerHTML;
 
-    Object.values(tags).forEach((tag) => {
-      for (var i = 0; i < earningsBullshits.length; i++) {
-        const text = tag.innerHTML;
-        tag.innerHTML = highlightText(earningsBullshits[i], text);
-      }
-
-      for (let i = 0; i < politicalBullshits.length; i++) {
-        const text = tag.innerHTML;
-        tag.innerHTML = highlightText(politicalBullshits[i], text);
-      }
-    });
+    for (let i = 0; i < bullshitArray.length; i++) {
+      tag.innerHTML = highlightText(bullshitArray[i], html);
+    }
   };
 
-  highlightPropaganda("p");
+  highlightPropaganda();
 };
 
 if (document.readyState === "interactive") {
