@@ -140,15 +140,12 @@ const start = () => {
   document.head.appendChild(style);
 
   const highlightText = (regExp, originalHtml) => {
-    const newHtml = originalHtml.replace(
-      new RegExp(regExp, "gi"),
-      (match) => {
-        return '<span class="highlight">' + match + "</span>";
-      }
-    );
+    const newHtml = originalHtml.replace(new RegExp(regExp, "gi"), (match) => {
+      return '<span class="highlight">' + match + "</span>";
+    });
 
     return newHtml;
-  }
+  };
 
   const highlightPropaganda = (tagName) => {
     const tags = document.getElementsByTagName(tagName);
